@@ -134,68 +134,71 @@ def parse_file():
             data['operators'][existing_operator_index]['lastSeen'] = data_time_parsed
 
         # Max Altitude
-        altitude = flight['alt_geom']
-        if altitude > data['maxAltitude']['altitude']:
-            logging.info("Found new max altitude: " + str(altitude) + "ft by " + flight['flight'])
-            data['maxAltitude']['altitude'] = altitude
-            data['maxAltitude']['flight'] = flight['flight']
-            data['maxAltitude']['seenAt'] = data_time_parsed
-            data['maxAltitude']['latitude'] = flight['lat']
-            data['maxAltitude']['longitude'] = flight['lon']
+        if 'alt_geom' in flight:
+            altitude = flight['alt_geom']
+            if altitude > data['maxAltitude']['altitude']:
+                logging.info("Found new max altitude: " + str(altitude) + "ft by " + flight['flight'])
+                data['maxAltitude']['altitude'] = altitude
+                data['maxAltitude']['flight'] = flight['flight']
+                data['maxAltitude']['seenAt'] = data_time_parsed
+                data['maxAltitude']['latitude'] = flight['lat']
+                data['maxAltitude']['longitude'] = flight['lon']
 
         # Max Speed
-        speed = flight['gs']
-        if speed > data['maxGroundSpeed']['groundSpeed']:
-            logging.info("Found new max ground speed: " + str(speed) + "kt by " + flight['flight'])
-            data['maxGroundSpeed']['groundSpeed'] = speed
-            data['maxGroundSpeed']['flight'] = flight['flight']
-            data['maxGroundSpeed']['seenAt'] = data_time_parsed
-            data['maxGroundSpeed']['latitude'] = flight['lat']
-            data['maxGroundSpeed']['longitude'] = flight['lon']
+        if 'gs' in flight:
+            speed = flight['gs']
+            if speed > data['maxGroundSpeed']['groundSpeed']:
+                logging.info("Found new max ground speed: " + str(speed) + "kt by " + flight['flight'])
+                data['maxGroundSpeed']['groundSpeed'] = speed
+                data['maxGroundSpeed']['flight'] = flight['flight']
+                data['maxGroundSpeed']['seenAt'] = data_time_parsed
+                data['maxGroundSpeed']['latitude'] = flight['lat']
+                data['maxGroundSpeed']['longitude'] = flight['lon']
 
         # Station Distance
-        # geopy.distance.vincenty(coords_1, coords_2)
-        distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
-        if distance_to_station > data['furthestFlight']['distance']:
-            logging.info("Found new furthest flight: " + str(distance_to_station) + "nm by " + flight['flight'])
-            data['furthestFlight']['distance'] = distance_to_station
-            data['furthestFlight']['flight'] = flight['flight']
-            data['furthestFlight']['seenAt'] = data_time_parsed
-            data['furthestFlight']['latitude'] = flight['lat']
-            data['furthestFlight']['longitude'] = flight['lon']
-        elif distance_to_station < data['closestFlight']['distance'] or data['closestFlight']['distance'] == 0:
-            logging.info("Found new closest flight: " + str(distance_to_station) + "nm by " + flight['flight'])
-            data['closestFlight']['distance'] = distance_to_station
-            data['closestFlight']['flight'] = flight['flight']
-            data['closestFlight']['seenAt'] = data_time_parsed
-            data['closestFlight']['latitude'] = flight['lat']
-            data['closestFlight']['longitude'] = flight['lon']
+        if 'lat' in flight and 'lon' in flight:
+            distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
+            if distance_to_station > data['furthestFlight']['distance']:
+                logging.info("Found new furthest flight: " + str(distance_to_station) + "nm by " + flight['flight'])
+                data['furthestFlight']['distance'] = distance_to_station
+                data['furthestFlight']['flight'] = flight['flight']
+                data['furthestFlight']['seenAt'] = data_time_parsed
+                data['furthestFlight']['latitude'] = flight['lat']
+                data['furthestFlight']['longitude'] = flight['lon']
+            elif distance_to_station < data['closestFlight']['distance'] or data['closestFlight']['distance'] == 0:
+                logging.info("Found new closest flight: " + str(distance_to_station) + "nm by " + flight['flight'])
+                data['closestFlight']['distance'] = distance_to_station
+                data['closestFlight']['flight'] = flight['flight']
+                data['closestFlight']['seenAt'] = data_time_parsed
+                data['closestFlight']['latitude'] = flight['lat']
+                data['closestFlight']['longitude'] = flight['lon']
 
         # Signal
-        signal = flight['rssi']
-        distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
-        if signal > data['maxSignal']['signal'] or data['maxSignal']['signal'] == 0:
-            logging.info(
-                "Found new max signal: " + str(distance_to_station) + "nm by " + flight[
-                    'flight'] + " with signal: " + str(
-                    signal))
-            data['maxSignal']['signal'] = signal
-            data['maxSignal']['distance'] = distance_to_station
-            data['maxSignal']['flight'] = flight['flight']
-            data['maxSignal']['seenAt'] = data_time_parsed
-            data['maxSignal']['latitude'] = flight['lat']
-            data['maxSignal']['longitude'] = flight['lon']
-        elif signal < data['minSignal']['signal'] or data['minSignal']['signal'] == 0:
-            logging.info(
-                "Found new min signal: " + str(distance_to_station) + "nm by " + flight[
-                    'flight'] + " with signal: " + str(
-                    signal))
-            data['minSignal']['signal'] = signal
-            data['minSignal']['distance'] = distance_to_station
-            data['minSignal']['flight'] = flight['flight']
-            data['minSignal']['seenAt'] = data_time_parsed
-            data['minSignal']['latitude'] = flight['lat']
-            data['minSignal']['longitude'] = flight['lon']
+        if 'rssi' in flight:
+            signal = flight['rssi']
+            distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
+            if signal > data['maxSignal']['signal'] or data['maxSignal']['signal'] == 0:
+                logging.info(
+                    "Found new max signal: " + str(distance_to_station) + "nm by " + flight[
+                        'flight'] + " with signal: " + str(
+                        signal))
+                data['maxSignal']['signal'] = signal
+                data['maxSignal']['distance'] = distance_to_station
+                data['maxSignal']['flight'] = flight['flight']
+                data['maxSignal']['seenAt'] = data_time_parsed
+                data['maxSignal']['latitude'] = flight['lat']
+                data['maxSignal']['longitude'] = flight['lon']
+            elif signal < data['minSignal']['signal'] or data['minSignal']['signal'] == 0:
+                logging.info(
+                    "Found new min signal: " + str(distance_to_station) + "nm by " + flight[
+                        'flight'] + " with signal: " + str(
+                        signal))
+                data['minSignal']['signal'] = signal
+                data['minSignal']['distance'] = distance_to_station
+                data['minSignal']['flight'] = flight['flight']
+                data['minSignal']['seenAt'] = data_time_parsed
+                data['minSignal']['latitude'] = flight['lat']
+                data['minSignal']['longitude'] = flight['lon']
 
     save_data()
 
