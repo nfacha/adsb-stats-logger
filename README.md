@@ -12,7 +12,7 @@
 - Log the flight with the worst signal strength seen by the ADS-B receiver
 - All data is available in Metric Units (by default) or Imperial Units
 
-###WARNING: This is a highly in development script, things can and will change, your data.json file might break and need a manual fix if you update the script to a new version!
+### WARNING: This is a highly in development script, things can and will change, your data.json file might break and need a manual fix if you update the script to a new version!
 
 ## Usage
 1. Clone the git repo on your ADS-B server and enter its directory:
