@@ -92,11 +92,11 @@ def parse_file():
 
     # Updates data timeframes
     if data['times']['latest'] is None or data_time < datetime.strptime(data['times']['latest'], '%Y-%m-%d %H:%M:%S'):
-        oldest_file = data_time_parsed
+        newer_file = data_time_parsed
         data['times']['latest'] = oldest_file
 
     if data['times']['start'] is None or data_time > datetime.strptime(data['times']['start'], '%Y-%m-%d %H:%M:%S'):
-        newer_file = data_time_parsed
+        oldest_file = data_time_parsed
         data['times']['start'] = newer_file
     for flight in hData['aircraft']:
         if 'flight' not in flight:
@@ -141,8 +141,12 @@ def parse_file():
                 data['maxAltitude']['altitude'] = altitude
                 data['maxAltitude']['flight'] = flight['flight']
                 data['maxAltitude']['seenAt'] = data_time_parsed
-                data['maxAltitude']['latitude'] = flight['lat']
-                data['maxAltitude']['longitude'] = flight['lon']
+                if 'lat' in flight and 'lon' in flight:
+                    data['maxAltitude']['latitude'] = flight['lat']
+                    data['maxAltitude']['longitude'] = flight['lon']
+                else:
+                    data['maxAltitude']['latitude'] = None
+                    data['maxAltitude']['longitude'] = None
 
         # Max Speed
         if 'gs' in flight:
@@ -152,8 +156,12 @@ def parse_file():
                 data['maxGroundSpeed']['groundSpeed'] = speed
                 data['maxGroundSpeed']['flight'] = flight['flight']
                 data['maxGroundSpeed']['seenAt'] = data_time_parsed
-                data['maxGroundSpeed']['latitude'] = flight['lat']
-                data['maxGroundSpeed']['longitude'] = flight['lon']
+                if 'lat' in flight and 'lon' in flight:
+                    data['maxGroundSpeed']['latitude'] = flight['lat']
+                    data['maxGroundSpeed']['longitude'] = flight['lon']
+                else:
+                    data['maxGroundSpeed']['latitude'] = None
+                    data['maxGroundSpeed']['longitude'] = None
 
         # Station Distance
         if 'lat' in flight and 'lon' in flight:
@@ -186,8 +194,12 @@ def parse_file():
                 data['maxSignal']['distance'] = distance_to_station
                 data['maxSignal']['flight'] = flight['flight']
                 data['maxSignal']['seenAt'] = data_time_parsed
-                data['maxSignal']['latitude'] = flight['lat']
-                data['maxSignal']['longitude'] = flight['lon']
+                if 'lat' in flight and 'lon' in flight:
+                    data['maxSignal']['latitude'] = flight['lat']
+                    data['maxSignal']['longitude'] = flight['lon']
+                else:
+                    data['maxSignal']['latitude'] = None
+                    data['maxSignal']['longitude'] = None
             elif signal < data['minSignal']['signal'] or data['minSignal']['signal'] == 0:
                 logging.info(
                     "Found new min signal: " + str(distance_to_station) + "nm by " + flight[
@@ -197,8 +209,12 @@ def parse_file():
                 data['minSignal']['distance'] = distance_to_station
                 data['minSignal']['flight'] = flight['flight']
                 data['minSignal']['seenAt'] = data_time_parsed
-                data['minSignal']['latitude'] = flight['lat']
-                data['minSignal']['longitude'] = flight['lon']
+                if 'lat' in flight and 'lon' in flight:
+                    data['minSignal']['latitude'] = flight['lat']
+                    data['minSignal']['longitude'] = flight['lon']
+                else:
+                    data['minSignal']['latitude'] = None
+                    data['minSignal']['longitude'] = None
 
     save_data()
 
