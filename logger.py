@@ -93,11 +93,11 @@ def parse_file():
     # Updates data timeframes
     if data['times']['latest'] is None or data_time < datetime.strptime(data['times']['latest'], '%Y-%m-%d %H:%M:%S'):
         newer_file = data_time_parsed
-        data['times']['latest'] = oldest_file
+        data['times']['latest'] = newer_file
 
     if data['times']['start'] is None or data_time > datetime.strptime(data['times']['start'], '%Y-%m-%d %H:%M:%S'):
         oldest_file = data_time_parsed
-        data['times']['start'] = newer_file
+        data['times']['start'] = oldest_file
     for flight in hData['aircraft']:
         if 'flight' not in flight:
             logging.debug("Flight without flight number: " + str(flight['hex']))
