@@ -204,37 +204,40 @@ def parse_file():
         # Signal
         if 'rssi' in flight:
             signal = flight['rssi']
-            distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
             if signal > data['maxSignal']['signal'] or data['maxSignal']['signal'] == 0:
                 logging.info(
                     "Found new max signal: " + str(distance_to_station) + "nm by " + flight[
                         'flight'] + " with signal: " + str(
                         signal))
                 data['maxSignal']['signal'] = signal
-                data['maxSignal']['distance'] = distance_to_station
                 data['maxSignal']['flight'] = flight['flight']
                 data['maxSignal']['seenAt'] = data_time_parsed
                 if 'lat' in flight and 'lon' in flight:
+                    distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
+                    data['maxSignal']['distance'] = distance_to_station
                     data['maxSignal']['latitude'] = flight['lat']
                     data['maxSignal']['longitude'] = flight['lon']
                 else:
                     data['maxSignal']['latitude'] = None
                     data['maxSignal']['longitude'] = None
+                    data['maxSignal']['distance'] = None
             elif signal < data['minSignal']['signal'] or data['minSignal']['signal'] == 0:
                 logging.info(
                     "Found new min signal: " + str(distance_to_station) + "nm by " + flight[
                         'flight'] + " with signal: " + str(
                         signal))
                 data['minSignal']['signal'] = signal
-                data['minSignal']['distance'] = distance_to_station
                 data['minSignal']['flight'] = flight['flight']
                 data['minSignal']['seenAt'] = data_time_parsed
                 if 'lat' in flight and 'lon' in flight:
+                    distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
+                    data['minSignal']['distance'] = distance_to_station
                     data['minSignal']['latitude'] = flight['lat']
                     data['minSignal']['longitude'] = flight['lon']
                 else:
                     data['minSignal']['latitude'] = None
                     data['minSignal']['longitude'] = None
+                    data['minSignal']['distance'] = None
 
     save_data()
 
