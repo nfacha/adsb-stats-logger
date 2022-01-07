@@ -256,4 +256,4 @@ if not os.path.exists('./data.json'):
 load_data()
 while True:
     parse_file()
-    time.sleep(0.1)
+    time.sleep(5)
