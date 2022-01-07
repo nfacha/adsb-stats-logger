@@ -1,15 +1,35 @@
+import configparser
 import json
 import logging
 import os
 import time
 from datetime import datetime
+import sentry_sdk
 
 import geopy.distance
 
-DATA_PATH = '/run/dump1090-fa/'
-STATION_LOCATION = (37.7, -25.5)
+DATA_PATH = None
+STATION_LOCATION = None
 data = {}
+config = configparser.ConfigParser()
+config.read('config.ini')
 
+
+def load_config():
+    global DATA_PATH
+    global STATION_LOCATION
+    logging.basicConfig(level=logging.getLevelName(int(config['LOGGING']['LOG_LEVEL'])))
+    logging.info("Logging level: " + config['LOGGING']['LOG_LEVEL'])
+    DATA_PATH = config['PATHS']['data_path']
+    logging.info("Data path: " + DATA_PATH)
+    STATION_LOCATION = (config['LOCATION']['STATION_LAT'], config['LOCATION']['STATION_LNG'])
+    logging.info("Station location: " + str(STATION_LOCATION))
+    if config['LOGGING']['SENTRY_DSN'] is not '':
+        sentry_sdk.init(
+            config['LOGGING']['SENTRY_DSN'],
+            traces_sample_rate=1.0,
+            environment=config['LOGGING']['SENTRY_ENVIRONMENT']
+        )
 
 def load_data():
     logging.info("Loading data file...")
@@ -227,8 +247,7 @@ def find(lst, key, value):
 
 
 #####
-logging.basicConfig(level=logging.INFO)
-logging.info("Initializing...")
+load_config()
 if not os.path.exists('./data.json'):
     init_data()
 load_data()
