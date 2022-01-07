@@ -1,0 +1,37 @@
+{
+  "now": 1641562014.2,
+  "messages": 36934,
+  "aircraft": [
+    {
+      "hex": "495242",
+      "flight": "SAT2500 ",
+      "alt_baro": 19700,
+      "alt_geom": 20825,
+      "gs": 217.3,
+      "track": 293,
+      "geom_rate": 1088,
+      "squawk": "5251",
+      "emergency": "none",
+      "category": "A2",
+      "lat": 38.062408,
+      "lon": -26.654644,
+      "nic": 8,
+      "rc": 186,
+      "seen_pos": 2.3,
+      "version": 2,
+      "nic_baro": 1,
+      "nac_p": 10,
+      "nac_v": 1,
+      "sil": 3,
+      "sil_type": "perhour",
+      "gva": 2,
+      "sda": 2,
+      "modea": true,
+      "mlat": [],
+      "tisb": [],
+      "messages": 3997,
+      "seen": 0.1,
+      "rssi": -24.6
+    }
+  ]
+}
