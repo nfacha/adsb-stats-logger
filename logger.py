@@ -2,6 +2,8 @@ import configparser
 import json
 import logging
 import os
+import signal
+import sys
 import time
 from datetime import datetime
 import sentry_sdk
@@ -45,6 +47,9 @@ def save_data():
     with open('./data.json', 'w') as f:
         json.dump(data, f)
 
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
 
 def init_data():
     logging.info("Creating new data file...")
@@ -250,6 +255,7 @@ def find(lst, key, value):
 
 
 #####
+signal.signal(signal.SIGINT, signal_handler)
 load_config()
 if not os.path.exists('./data.json'):
     init_data()
