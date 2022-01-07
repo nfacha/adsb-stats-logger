@@ -1,6 +1,6 @@
-#ADS-B Stats Logger
+# ADS-B Stats Logger
 
-##Features
+## Features
 
 - Log all unique flights seen by the ADS-B receiver
 - Log all unique operators seen by the ADS-B receiver
