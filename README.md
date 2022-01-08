@@ -83,3 +83,6 @@ If you want to see the runtime logs, or to be able to Ctrl-C you can enter the s
 ```bash
 screen -x logger
 ```
+
+### Inspiration
+This was inspired by wesmorgan1's Reddit post: https://www.reddit.com/r/ADSB/comments/rutot0/python3_script_to_profile_dump1090_output_and/
