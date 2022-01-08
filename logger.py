@@ -227,6 +227,7 @@ def parse_file():
                     data['maxSignal']['longitude'] = None
                     data['maxSignal']['distance'] = None
             elif signal < data['minSignal']['signal'] or data['minSignal']['signal'] == 0:
+                distance_to_station = geopy.distance.geodesic((flight['lat'], flight['lon']), STATION_LOCATION).nm
                 logging.info(
                     "Found new min signal: " + str(distance_to_station) + "nm by " + flight[
                         'flight'] + " with signal: " + str(
