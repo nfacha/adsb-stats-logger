@@ -110,7 +110,11 @@ def init_data():
 
 def parse_file():
     logging.info("Parsing aircraft json")
-    hData = json.loads(open(DATA_PATH + '/aircraft.json', 'r').read())
+    try:
+        hData = json.loads(open(DATA_PATH + 'aircraft.json', 'r').read())
+    except FileNotFoundError:
+        logging.error("Could not load and parse aircraft json")
+        return
     # hData = json.loads(open('./sample.json', 'r').read())
     data_time = datetime.fromtimestamp(hData['now'])
     data_time_parsed = data_time.strftime('%Y-%m-%d %H:%M:%S')
