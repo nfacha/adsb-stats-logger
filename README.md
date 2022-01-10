@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/user/65ddcee5-893d-45e3-989c-4d52691b9072/project/68abfa67-8b61-46d6-b31d-de28ef515ccb.svg)](https://wakatime.com/badge/user/65ddcee5-893d-45e3-989c-4d52691b9072/project/68abfa67-8b61-46d6-b31d-de28ef515ccb)
 # ADS-B Stats Logger
 
 ## Features
