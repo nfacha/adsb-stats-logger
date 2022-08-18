@@ -26,7 +26,7 @@ def load_config():
     logging.info("Data path: " + DATA_PATH)
     STATION_LOCATION = (config['LOCATION']['STATION_LAT'], config['LOCATION']['STATION_LNG'])
     logging.info("Station location: " + str(STATION_LOCATION))
-    if config['LOGGING']['SENTRY_DSN'] is not '':
+    if config['LOGGING']['SENTRY_DSN'] != '':
         sentry_sdk.init(
             config['LOGGING']['SENTRY_DSN'],
             traces_sample_rate=1.0,
@@ -110,12 +110,12 @@ def init_data():
 
 def parse_file():
     logging.info("Parsing aircraft json")
-    try:
-        hData = json.loads(open(DATA_PATH + 'aircraft.json', 'r').read())
-    except FileNotFoundError:
-        logging.error("Could not load and parse aircraft json")
-        return
-    # hData = json.loads(open('./sample.json', 'r').read())
+    # try:
+    #     hData = json.loads(open(DATA_PATH + 'aircraft.json', 'r').read())
+    # except FileNotFoundError:
+    #     logging.error("Could not load and parse aircraft json")
+    #     return
+    hData = json.loads(open('./sample.json', 'r').read())
     data_time = datetime.fromtimestamp(hData['now'])
     data_time_parsed = data_time.strftime('%Y-%m-%d %H:%M:%S')
 
