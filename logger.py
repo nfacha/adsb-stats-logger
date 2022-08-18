@@ -6,7 +6,7 @@ import signal
 import sys
 import time
 from datetime import datetime
-import sentry_sdk
+
 
 import geopy.distance
 
@@ -26,7 +26,8 @@ def load_config():
     logging.info("Data path: " + DATA_PATH)
     STATION_LOCATION = (config['LOCATION']['STATION_LAT'], config['LOCATION']['STATION_LNG'])
     logging.info("Station location: " + str(STATION_LOCATION))
-    if config['LOGGING']['SENTRY_DSN'] is not '':
+    if config['LOGGING']['SENTRY_DSN'] != '':
+        import sentry_sdk
         sentry_sdk.init(
             config['LOGGING']['SENTRY_DSN'],
             traces_sample_rate=1.0,
