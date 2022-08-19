@@ -1,6 +1,6 @@
 # Changelog
 
-# 1.1.0 (August X 2022)
+# 1.1.0 (August 19 2022)
 - Add Changelog
 - Update readme with some badges
 - Create data backup before overriding, to prevent data loss on power failure
