@@ -124,7 +124,8 @@ def init_data():
 
 def parse_file():
     logging.info("Parsing aircraft json")
-    if config['DEBUG']['USE_SAMPLE_DATA']:
+    if config['DEBUG']['USE_SAMPLE_DATA'] == 'True':
+        logging.warning("Using sample data")
         hData = json.loads(open('./sample.json', 'r').read())
     else:
         try:
