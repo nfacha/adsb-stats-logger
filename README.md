@@ -24,7 +24,7 @@
 - All data is available in Metric Units (by default) or Imperial Units
 
 ## Python Compatibility
-This has been tested and confirmed to work work on Python 3.10, but should work fine in Python.
+This has been tested and confirmed to work on Python 3.10, but should work fine in Python.
 
 ## Usage
 1. Clone the git repo on your ADS-B server and enter its directory:
