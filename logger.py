@@ -2,11 +2,11 @@ import configparser
 import json
 import logging
 import os
+import shutil
 import signal
 import sys
 import time
 from datetime import datetime
-
 
 import geopy.distance
 
@@ -26,6 +26,10 @@ def load_config():
     logging.info("Data path: " + DATA_PATH)
     STATION_LOCATION = (config['LOCATION']['STATION_LAT'], config['LOCATION']['STATION_LNG'])
     logging.info("Station location: " + str(STATION_LOCATION))
+    if config['UNITS']['USE_UTC'] == 'False':
+        logging.info("Using local time")
+    else:
+        logging.info("Using UTC time")
     if config['LOGGING']['SENTRY_DSN'] != '':
         import sentry_sdk
         sentry_sdk.init(
@@ -33,6 +37,7 @@ def load_config():
             traces_sample_rate=1.0,
             environment=config['LOGGING']['SENTRY_ENVIRONMENT']
         )
+
 
 def load_data():
     logging.info("Loading data file...")
@@ -44,13 +49,21 @@ def load_data():
 def save_data():
     logging.info("Saving data file...")
     global data
-    print(data)
+    # print(data)
+    if os.path.exists('./data.json.backup'):
+        os.remove('./data.json.backup')
+    shutil.copyfile('./data.json', './data.json.backup')
+
     with open('./data.json', 'w') as f:
         json.dump(data, f)
+    with open('./data.json', 'w') as f:
+        json.dump(data, f)
+
 
 def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     sys.exit(0)
+
 
 def init_data():
     logging.info("Creating new data file...")
@@ -111,13 +124,20 @@ def init_data():
 
 def parse_file():
     logging.info("Parsing aircraft json")
-    try:
-        hData = json.loads(open(DATA_PATH + 'aircraft.json', 'r').read())
-    except FileNotFoundError:
-        logging.error("Could not load and parse aircraft json")
-        return
-    # hData = json.loads(open('./sample.json', 'r').read())
-    data_time = datetime.fromtimestamp(hData['now'])
+    if config['DEBUG']['USE_SAMPLE_DATA'] == 'True':
+        logging.warning("Using sample data")
+        hData = json.loads(open('./sample.json', 'r').read())
+    else:
+        try:
+            hData = json.loads(open(DATA_PATH + 'aircraft.json', 'r').read())
+        except FileNotFoundError:
+            logging.error("Could not load and parse aircraft json")
+            return
+
+    if config['UNITS']['USE_UTC'] == 'False':
+        data_time = datetime.fromtimestamp(hData['now'])
+    else:
+        data_time = datetime.utcfromtimestamp(hData['now'])
     data_time_parsed = data_time.strftime('%Y-%m-%d %H:%M:%S')
 
     # Updates data timeframes
