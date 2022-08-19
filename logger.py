@@ -2,6 +2,7 @@ import configparser
 import json
 import logging
 import os
+import shutil
 import signal
 import sys
 import time
@@ -44,7 +45,13 @@ def load_data():
 def save_data():
     logging.info("Saving data file...")
     global data
-    print(data)
+    #print(data)
+    if os.path.exists('./data.json.backup'):
+        os.remove('./data.json.backup')
+        shutil.copyfile('./data.json', './data.json.backup')
+
+    with open('./data.json', 'w') as f:
+        json.dump(data, f)
     with open('./data.json', 'w') as f:
         json.dump(data, f)
 

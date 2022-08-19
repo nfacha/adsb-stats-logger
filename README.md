@@ -1,5 +1,15 @@
 [![wakatime](https://wakatime.com/badge/user/65ddcee5-893d-45e3-989c-4d52691b9072/project/68abfa67-8b61-46d6-b31d-de28ef515ccb.svg)](https://wakatime.com/badge/user/65ddcee5-893d-45e3-989c-4d52691b9072/project/68abfa67-8b61-46d6-b31d-de28ef515ccb)
+
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/nfacha/adsb-stats-logger?label=Latest%20version)
+![GitHub Release Date](https://img.shields.io/github/release-date/nfacha/adsb-stats-logger)
+![GitHub last commit](https://img.shields.io/github/last-commit/nfacha/adsb-stats-logger)
+
+![GitHub Repo stars](https://img.shields.io/github/stars/nfacha/adsb-stats-logger?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/nfacha/adsb-stats-logger?style=social)
+
+[![Discord](https://img.shields.io/discord/933444164379619348)](https://discord.gg/ecyK3y4zTW)
 # ADS-B Stats Logger
+## Like this project? Don't forget to STAR it and follow it for future releases :)
 
 ## Features
 
