@@ -48,7 +48,7 @@ def save_data():
     #print(data)
     if os.path.exists('./data.json.backup'):
         os.remove('./data.json.backup')
-        shutil.copyfile('./data.json', './data.json.backup')
+    shutil.copyfile('./data.json', './data.json.backup')
 
     with open('./data.json', 'w') as f:
         json.dump(data, f)
