@@ -1,5 +1,8 @@
 # Changelog
 
+# 1.1.1 (August 19 2022)
+- Fix dependencies conflict
+
 # 1.1.0 (August 19 2022)
 - Add Changelog
 - Update readme with some badges
