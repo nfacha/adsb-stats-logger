@@ -6,6 +6,7 @@
 - Create data backup before overriding, to prevent data loss on power failure
 - Add setting to save times in UTC, instead of local
 - Add setting to use sample data
+- Update dependencies
 
 # 1.0.1 (August 18 2022)
 https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.0.1
