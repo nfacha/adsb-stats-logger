@@ -2,6 +2,7 @@
 
 # 1.1.0 (August X 2022)
 - Add Changelog
+- Update readme with some badges
 - Create data backup before overriding, to prevent data loss on power failure
 - Add setting to save times in UTC, instead of local
 
