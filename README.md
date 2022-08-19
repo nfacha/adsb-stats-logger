@@ -13,7 +13,8 @@
 - Log the flight with the worst signal strength seen by the ADS-B receiver
 - All data is available in Metric Units (by default) or Imperial Units
 
-### WARNING: This is a highly in development script, things can and will change, your data.json file might break and need a manual fix if you update the script to a new version!
+## Python Compatibility
+This has been tested and confirmed to work work on Python 3.10, but should work fine in Python.
 
 ## Usage
 1. Clone the git repo on your ADS-B server and enter its directory:
@@ -38,9 +39,10 @@ STATION_LAT = 37.7 #Your base station latitude, used for distance calculations
 STATION_LNG = 37.7 #Your base station longitude, used for distance calculations
 [LOGGING]
 SENTRY_DSN =#Sentry DSN for error logging, leave empry to disable
+SENTRY_ENVIRONMENT=#Sentry environment, leave empry to disable
 LOG_LEVEL = 20 #Log level, see https://docs.python.org/3/library/logging.html#logging-levels
 [UNITS]
-USE_METRIC_SYSTEM = true #Use metric system for distance calculations, else use imperial
+USE_METRIC_SYSTEM = true #Use metric system for distance calculations, else use caveman units (a.k.a. imperial)
 ```
 5. Leave the script running in the background, one easy way would be to use screen
 ```bash
