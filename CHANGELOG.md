@@ -1,9 +1,15 @@
 # Changelog
 
+# 1.1.2 (August 23 2022)
+https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.1.2
+- perator code should always be 3 characters (Fix #1)
+
 # 1.1.1 (August 19 2022)
+https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.1.1
 - Fix dependencies conflict
 
 # 1.1.0 (August 19 2022)
+https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.1.0
 - Add Changelog
 - Update readme with some badges
 - Create data backup before overriding, to prevent data loss on power failure
