@@ -2,7 +2,7 @@
 
 # 1.1.2 (August 23 2022)
 https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.1.2
-- perator code should always be 3 characters (Fix #1)
+- Operator code should always be 3 characters (Fix #1)
 
 # 1.1.1 (August 19 2022)
 https://github.com/nfacha/adsb-stats-logger/releases/tag/v1.1.1
