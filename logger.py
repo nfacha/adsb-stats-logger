@@ -169,7 +169,7 @@ def parse_file():
             data['flights'][existing_flight_index]['lastSeen'] = data_time_parsed
 
         # Operators
-        operator = ''.join(i for i in flight['flight'] if not i.isdigit())
+        operator = ''.join(flight['flight'][0:3])
         if not any(x['operator'] == operator for x in data['operators']):
             logging.info("Found new operator: " + operator)
             data['operators'].append({
