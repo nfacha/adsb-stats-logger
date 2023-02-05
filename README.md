@@ -58,7 +58,7 @@ USE_METRIC_SYSTEM = true #Use metric system for distance calculations, else use 
 ```bash
 screen -S logger -dm python3 logger.py
 ```
-6. By now the script should be running, wait a bit for data to gather and as soon as you have at least one plane in your range it shoudl start to gather data, to see this data use
+6. By now the script should be running, wait a bit for data to gather and as soon as you have at least one plane in your range it should start to gather data, to see this data use
 ```bash
 python3 show.py
 ```
